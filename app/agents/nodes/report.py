@@ -6,6 +6,7 @@ from typing import Any
 from app.agents.state import AgentState
 from app.core.logging import get_logger
 from app.agents.nodes.mode_a_generator import generate_mode_a_report
+from app.agents.nodes.mode_d_generator import generate_mode_d_report
 
 logger = get_logger(__name__)
 
@@ -51,6 +52,28 @@ async def report_node(state: AgentState) -> dict[str, Any]:
                 "report_json": report_json,
                 "step_count": state.get("step_count", 0) + 1,
                 "progress": "Mode A report generated (three-phase)",
+            }
+        
+        # === Mode D: Solution Recommendation Generator ===
+        if research_mode == "D":
+            logger.info("mode_d_generation_started", job_id=job_id)
+            mode_d_md, visualization_json = await generate_mode_d_report(query, job_id)
+            
+            # Build JSON report with visualization data
+            report_json = {
+                "query": query,
+                "research_mode": "D",
+                "mode_description": "系统配置/方案推荐",
+                "visualization": visualization_json,
+            }
+            
+            logger.info("report_node_completed", job_id=job_id, mode="D")
+            
+            return {
+                "report_md": mode_d_md,
+                "report_json": report_json,
+                "step_count": state.get("step_count", 0) + 1,
+                "progress": "Mode D report generated (solution recommendations)",
             }
         
         # === Mode B/C: Original Logic ===

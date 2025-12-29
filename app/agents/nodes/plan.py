@@ -164,7 +164,22 @@ async def plan_node(state: AgentState) -> dict[str, Any]:
 - 允许"不适合对比"结论
 - 以判断为主，表格为辅
 
-请填写 research_mode (A/B/C)、mode_confidence (0-1)、mode_reason、suggested_layer、risk_note。
+### Mode D：系统配置 / 方案推荐（Solution Recommendation）
+特征：
+- 需要完整的配置方案或解决方案
+- 包含关键词：配置 / 推荐 / 方案 / 组装 / 搭配 / 怎么选 / 哪个好
+- 涉及多个组件组成的系统（如电脑配置、技术栈选型、工具链搭配）
+
+用户真实意图：👉 "给我一个可以直接照着买/用的完整方案"
+
+行为规则：
+- 按场景划分方案（至少3类）
+- 每个方案必须是完整系统
+- 不做市场分析，只给可执行方案
+- ❌ 禁止生成对比表
+- ✅ 必须输出具体型号/名称
+
+请填写 research_mode (A/B/C/D)、mode_confidence (0-1)、mode_reason、suggested_layer、risk_note。
 
 ## Step 0: 可行性评估
 给出一句话评估：是否适合做结构化对比研究？

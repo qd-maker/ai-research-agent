@@ -43,6 +43,7 @@ BLOCKED_DOMAINS = {
     "segmentfault.com", # SegmentFault - timeout issues
     "ones.cn",          # Ones - timeout issues
     "worktile.com",     # Worktile - timeout issues
+    "movieboxpro.app",  # MovieBoxPro - strict anti-bot (403)
 }
 
 
