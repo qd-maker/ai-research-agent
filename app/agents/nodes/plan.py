@@ -179,7 +179,26 @@ async def plan_node(state: AgentState) -> dict[str, Any]:
 - ❌ 禁止生成对比表
 - ✅ 必须输出具体型号/名称
 
-请填写 research_mode (A/B/C/D)、mode_confidence (0-1)、mode_reason、suggested_layer、risk_note。
+### Mode E：宏观 / 框架型判断（Macro Framework Analysis）
+特征：
+- 讨论长期趋势或"未来"
+- 涉及宏观系统（经济、社会、技术、文明）
+- 无明确可执行方案
+- 用户意图是"理解"而不是"选择"
+- 包含关键词：未来 / 趋势 / 会不会 / 是否 / 泡沫 / 长期
+
+用户真实意图：👉 "帮我理解这个问题应该如何分析"
+
+行为规则：
+- 禁止给出明确预测结果（点位、涨跌、时间点）
+- 禁止生成对比表
+- 禁止枚举个股或单一对象
+- 重点在于"变量、框架、情景"
+- ✅ 必须输出核心变量、情景路径、行动建议
+
+示例：美股的未来、AI是否是泡沫、人类会不会被AI取代
+
+请填写 research_mode (A/B/C/D/E)、mode_confidence (0-1)、mode_reason、suggested_layer、risk_note。
 
 ## Step 0: 可行性评估
 给出一句话评估：是否适合做结构化对比研究？
